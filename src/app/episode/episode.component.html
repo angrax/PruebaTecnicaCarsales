@@ -1,0 +1,14 @@
+<div class="element">
+  <h1>Episodes</h1>
+  <select #selectEpisodes name="listEpisodes" [size]="12" (change)="onEpisodeChange(selectEpisodes.value)">
+    <option *ngFor="let option of Episodes" [value]="option.id">Episode {{option.episode}} - {{option.name}}</option>
+  </select>
+
+  <h1>Episode</h1>
+  <div class="element">
+      <p>Name: {{SelectedEpisode.name}}</p>
+      <p>Air Date: {{SelectedEpisode.airDate}}</p>
+  </div>
+
+  <app-character [Characters]="Characters"></app-character>
+</div>

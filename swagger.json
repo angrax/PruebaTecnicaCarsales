@@ -1,0 +1,358 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CarsalesBFF",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7059/"
+    }
+  ],
+  "paths": {
+    "/api/Character/{id}": {
+      "get": {
+        "tags": [
+          "Character"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Character/GetByIds": {
+      "get": {
+        "tags": [
+          "Character"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Episode/GetPaged": {
+      "get": {
+        "tags": [
+          "Episode"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Episode/GetAll": {
+      "get": {
+        "tags": [
+          "Episode"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Character": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "species": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "origin": {
+            "$ref": "#/components/schemas/Origin"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "episode": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Episode": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/Info"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Result"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EpisodeResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "airDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "episode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "season": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Info": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "next": {
+            "type": "string",
+            "nullable": true
+          },
+          "prev": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Origin": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "air_date": {
+            "type": "string",
+            "nullable": true
+          },
+          "episode": {
+            "type": "string",
+            "nullable": true
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

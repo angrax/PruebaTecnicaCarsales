@@ -1,0 +1,14 @@
+<h1>Characters</h1>
+<div class="content-characters">
+  <div class="card" *ngFor="let character of Characters">
+    <div class="card-description">
+      <img [src]="character.image" alt="" style="width: 200px; height: 200px">
+      <p>Specie: {{character.species}}</p>
+      <p>Name: {{character.name}}</p>
+      <p>Gender: {{character.gender}}</p>
+      <p>Origin: {{character.origin?.name}}</p>
+      <p>Location: {{character.location?.name}}</p>
+      <p>Status: {{character.status}}</p>
+    </div>
+  </div>
+</div>
